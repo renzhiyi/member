@@ -1,17 +1,13 @@
 const connect = require('./index');
 
-const query = (sql) => {
+const query = (sql, params = []) => {
     return new Promise((resolve, reject) => {
-        console.log(333)
-        console.log(sql)
-        connect.query('select * from userlist', (error, data) => {
+        connect.query(sql, params, (error, data) => {
             console.log("====")
             if (error) {
-                console.log(555)
-                reject(error)
+                reject({ msg: 'error', error })
             } else {
-                console.log(444)
-                resolve(data);
+                resolve({ msg: 'success', data });
             }
         })
     })
